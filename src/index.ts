@@ -1,9 +1,11 @@
+#! /usr/bin/env node
+
 const { Command } = require("commander");
 const figlet = require("figlet");
 
 interface Options {
   color?: string;
-  second: boolean;
+  second: string;
   format?: string;
 }
 
@@ -11,13 +13,13 @@ const program = new Command();
 
 console.clear();
 
-console.log(figlet.textSync("CLICK"));
+console.log(figlet.textSync("CLICK - Clock for CLI"));
 
 program
-  .version("0.0.5")
+  .version("0.1.0")
   .description("A digital clock for CLI")
   .option("-c, --color <COLOR>", "Change color")
-  .option("-s, --second <VALUE>", "Display seconds [default: true]", true)
+  .option("-s, --second <VALUE>", "Display seconds [default: yes]")
   .option("-f, --format <FORMAT>", "Change format [default: 24h]")
   .parse(process.argv);
 
@@ -34,14 +36,14 @@ const displayTime = () => {
     hours = hours === "00" ? "12" : hours;
   }
 
-  if (typeof options.second === 'boolean' && !options.second) {
-    seconds = ""; 
-  } else {
-    console.warn("Invalid value for the -s option. Seconds are displayed by default.");
+  if (options.second == "no") {
+    seconds = "";
   }
 
   console.log(
-    figlet.textSync(`${hours} : ${minutes}${options.second ? ` : ${seconds}` : ""}`)
+    figlet.textSync(
+      `${hours} : ${minutes}${options.second !== "no" ? ` : ${seconds}` : ""}`
+    )
   );
 };
 
