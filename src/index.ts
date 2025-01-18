@@ -32,7 +32,7 @@ const displayTime = () => {
     seconds = "";
   }
 
-  console.log(`${hours}:${minutes}${seconds ? `:${seconds}` : ""}`);
+  console.log(figlet.textSync(`${hours} : ${minutes}${seconds ? ` : ${seconds}` : ""}`));
 };
 
 setInterval(console.clear, 1000);

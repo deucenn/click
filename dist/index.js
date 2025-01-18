@@ -5,7 +5,7 @@ const program = new Command();
 console.clear();
 console.log(figlet.textSync("CLICK"));
 program
-    .version("0.0.1")
+    .version("0.0.2")
     .description("A digital clock for CLI")
     .option("-c, --color <COLOR>", "Change color")
     .option("-s, --second <VALUE>", "Display seconds [default: true]", true)
@@ -24,7 +24,7 @@ const displayTime = () => {
     if (!options.second) {
         seconds = "";
     }
-    console.log(`${hours}:${minutes}${seconds ? `:${seconds}` : ""}`);
+    console.log(figlet.textSync(`${hours} : ${minutes}${seconds ? ` : ${seconds}` : ""}`));
 };
 setInterval(console.clear, 1000);
 setInterval(displayTime, 1000);
