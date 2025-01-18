@@ -21,11 +21,18 @@ const displayTime = () => {
         hours = hours > "12" ? (parseInt(hours) - 12).toString() : hours;
         hours = hours === "00" ? "12" : hours;
     }
-    if (!options.second) {
+    if (typeof options.second === 'boolean' && !options.second) {
         seconds = "";
     }
-    console.log(figlet.textSync(`${hours} : ${minutes}${seconds ? ` : ${seconds}` : ""}`));
+    else {
+        console.warn("Invalid value for the -s option. Seconds are displayed by default.");
+    }
+    console.log(figlet.textSync(`${hours} : ${minutes}${options.second ? ` : ${seconds}` : ""}`));
+};
+const timezone = () => {
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 };
 setInterval(console.clear, 1000);
 setInterval(displayTime, 1000);
+setInterval(timezone, 1000);
 //# sourceMappingURL=index.js.map
